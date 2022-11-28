@@ -8,3 +8,8 @@ L'obietivo del test di valutazione è quella di creare un componente che permett
 - [Prototipo figma](https://www.figma.com/file/QYuo2S739UAYpQsg3O2BKI/Tab?node-id=1%3A2)
 - [Video esempio](http://staccah.fattureincloud.it/testfrontend/demo.mov)
 - [Font Inter](https://fonts.google.com/specimen/Inter)
+
+
+## Istruzioni
+Per eseguire l'applicazione web clonare il progetto ed eseguire dal terminale l'installazione dei pacchetti node tramite il comando `npm install` o `npm i`. 
+Quando termina l'installazione dei moduli eseguire dal terminale il comando `npm start`.
