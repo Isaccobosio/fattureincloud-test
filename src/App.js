@@ -1,5 +1,8 @@
 import React from 'react';
 import './App.css';
+import MonthCardComponent from './components/MonthCardComponent';
+import MonthComponent from './components/MonthItemComponent';
+import MonthListComponent from './components/MonthListComponent';
 import { MONTHS_AS_STRING } from './constant/date';
 import { getData } from './services/restfulService';
 
@@ -7,6 +10,7 @@ function App() {
 
   const [isLoading, setIsLoading] = React.useState(true);
   const [months, setMonths] = React.useState([]);
+  const [pickingRange, setPickingRange] = React.useState({ from: 0, to: 0 });
 
   React.useEffect(() => {
     loadData();
@@ -38,28 +42,49 @@ function App() {
     const MAX_AMOUNT = findMaxAmount(monthsData);
     let monthWhithName = monthsData.map((el, idx) => ({
       ...el,
-      selected: false,
-      name: MONTHS_AS_STRING[idx],
+      inRange: false,
       height: parseInt((100 * el.importo) / MAX_AMOUNT),
     }));
     setMonths(monthWhithName);
   }
 
-  const displayData = () => (
-    <div>
-      {
-        months.map((month, idx) => (
-          <div key={idx}>
-            <span>Documenti: {month.documenti}</span>
-            <span>Importo: {month.importo}</span>
-            <span>selezionato: {month.selected}</span>
-            <span>nome: {month.name}</span>
-            <span>Altezza: {month.height}</span>
+  const getMonthsRange = (from, to) => {
+    return months.slice(from, to + 1);
+  }
 
-          </div>
-        ))
-      }
-    </div>
+  const renderSelected = () => {
+    let { from, to } = pickingRange;
+    if (to == null) to = from;
+    if (from > to) {
+      let t = to;
+      to = from;
+      from = t;
+    }
+    return (
+      <div>
+        <h3>Mesi selezionati</h3>
+        <div className='grid-months-selected'>
+          {
+            getMonthsRange(from, to)
+              .map((el, idx) => (
+                <MonthCardComponent key={idx}
+                  name={MONTHS_AS_STRING[from + idx]}
+                  amount={el.importo}
+                  docNumber={el.documenti}
+                  height={el.height} />
+              ))
+          }
+        </div>
+      </div>
+    )
+  }
+
+  const displayData = () => (
+    <React.Fragment>
+      <MonthListComponent months={months}
+        onSelect={(pickingRange) => setPickingRange(pickingRange)} />
+      {renderSelected()}
+    </React.Fragment>
   )
 
   return (

@@ -4,10 +4,63 @@
   overflow: auto;
   display: flex;
   justify-content: center;
-  background-color: aliceblue;
+  line-height: 18px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
 }
 
 .container {
-  width: 1440px;
+  min-width: 75%;
+  max-width: 1440px;
+  padding: 20px;
   background-color: white;
+  overflow-x: scroll;
+}
+
+.months-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.grid-months-selected {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+table {
+  max-width: 100%;
+  overflow-x: scroll;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  line-height: 18px;
+  border: 1px solid #ebedee;
+}
+
+th {
+  text-align: left;
+  height: auto;
+  padding: 6px 8px 5px;
+  color: #0d97d5;
+  font-weight: 500;
+}
+
+tr.data-row {
+  height: 75px;
+  user-select: none;
+}
+
+.is-picking-message {
+  text-align: center;
+  margin-top: 8px;
+  color: #6f7e86;
+}
+
+.is-picking-message.hidden {
+  text-align: center;
+  margin-top: 8px;
+  color: transparent;
 }
