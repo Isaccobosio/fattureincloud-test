@@ -13,6 +13,12 @@ export default function MonthItemComponent({
   ...props
 }) {
 
+  React.useEffect(() => {
+    setTimeout(() => {
+      document.getElementById('green-light-' + idx).style.height = height + '%';
+    }, 250);
+  })
+
   return (
     <td className='month-container'
       onMouseOver={() => onMouseOver()}
@@ -22,10 +28,8 @@ export default function MonthItemComponent({
         <div className='doc-number'>{docNumber} doc.</div>
         <div className='amount'>{currencyFormat(amount)}</div>
       </div>
-      <div className='green-light'
-        style={{
-          height: height + "%"
-        }}></div>
+      <div id={'green-light-' + idx}
+        className='green-light'></div>
     </td>
   )
 }
