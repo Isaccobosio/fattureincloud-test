@@ -31,21 +31,28 @@ function App() {
       })
   }
 
+  const checkValidityOfData = (monthsData) => {
+    /*
+      Se ogni mese fosse distinguibile con un id
+      sarebbe possibile anche controllare quali mesi 
+      sono presenti nella lista fornita dall'endpoint.
+    */
+    return monthsData;
+  }
+
   const findMaxAmount = (arr) => {
-    const amounts = arr.map((object) => {
-      return object.importo;
-    });
+    const amounts = arr.map((el) => el.importo);
     return Math.max(...amounts);
   }
 
   const setUpData = (monthsData) => {
-    const MAX_AMOUNT = findMaxAmount(monthsData);
-    let monthWhithName = monthsData.map((el, idx) => ({
+    let monthsDataVerified = checkValidityOfData(monthsData);
+    const MAX_AMOUNT = findMaxAmount(monthsDataVerified);
+    let monthWhithHeight = monthsDataVerified.map((el, idx) => ({
       ...el,
-      inRange: false,
       height: parseInt((100 * el.importo) / MAX_AMOUNT),
     }));
-    setMonths(monthWhithName);
+    setMonths(monthWhithHeight);
   }
 
   const getMonthsRange = (from, to) => {

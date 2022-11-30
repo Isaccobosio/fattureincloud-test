@@ -2,6 +2,12 @@ import React from 'react'
 import { MONTHS_AS_STRING } from '../constant/date'
 import MonthItemComponent from './MonthItemComponent'
 
+/**
+ * 
+ * @param {Array} months Month list to show
+ * @param {function} onSelect Event called one a selection has complete. It returns a range {from, to}
+ * @returns A table with month displayed
+ */
 export default function MonthListComponent({
   months = [],
   onSelect,
